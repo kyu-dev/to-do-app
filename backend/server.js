@@ -1,20 +1,11 @@
-import express from 'express'; // Import d'Express avec ES6
-import pool from './models/bd.js'; // Import de la connexion PostgreSQL
+import express from 'express';
+import taskRouter from './routes/taskRoute.js';
 
+const PORT = 3000;
 const app = express();
 
-app.use(express.json());
+app.use('/tasks', taskRouter);
 
-// Exemple : récupérer tous les todos
-app.get('/todos', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM todo ORDER BY id');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
+app.listen(PORT, () => {
+  console.log(`🚀 serveur en écoute : http://localhost:${PORT} !!`);
 });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));

@@ -1,8 +1,5 @@
 import pkg from 'pg';
 const { Pool } = pkg;
-import dotenv from 'dotenv'; // Utilisation de dotenv en ES6
-
-dotenv.config(); // Charge les variables d'environnement
 
 const pool = new Pool({
   user: 'arthurvienotongaro',
@@ -12,4 +9,4 @@ const pool = new Pool({
   port: 5431,
 });
 
-export default pool; // Export avec ES6
+export default pool;
