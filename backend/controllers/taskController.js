@@ -1,5 +1,6 @@
 import pool from '../services/bd.js';
 
+// requette pour récuperer toutes les taches
 export const getTasks = async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM todo ORDER BY id');
@@ -10,9 +11,10 @@ export const getTasks = async (req, res) => {
   }
 };
 
+//requettes  pour créer une tache
 export const addTask = async (req, res) => {
   try {
-    console.log('Reçu :', req.query); // ou req.body selon ta méthode
+    console.log('Reçu :', req.body);
 
     const { description, name, due_date, status } = req.query;
 
@@ -23,7 +25,7 @@ export const addTask = async (req, res) => {
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error('Erreur SQL :', err); // ← très important pour voir le message exact
+    console.error('Erreur SQL :', err);
     res.sendStatus(500);
   }
 };
