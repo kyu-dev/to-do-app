@@ -32,7 +32,7 @@ export const addTask = async (req, res) => {
 
 // requette our delete une tache
 export const deleteTask = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
   try {
     const result = await pool.query('DELETE FROM todo WHERE id = $1', [id]);
     res.status(200).json({ message: 'Tâche supprimée avec succès' });
