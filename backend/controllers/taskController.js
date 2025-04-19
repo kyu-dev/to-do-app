@@ -41,3 +41,18 @@ export const deleteTask = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+//modifification d'une tache
+export const modifyTask = async (req, res) => {
+  const { id, description, name, due_date, status } = req.body;
+  try {
+    const result = await pool.query(
+      'UPDATE todo SET description = $1, name = $2, due_date = $3, status = $4 WHERE id = $5',
+      [description, name, due_date, status, id]
+    );
+    res.status(200).json({ message: 'Tâche modifiée avec succès' });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
