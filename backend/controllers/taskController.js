@@ -29,3 +29,15 @@ export const addTask = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+// requette our delete une tache
+export const deleteTask = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const result = await pool.query('DELETE FROM todo WHERE id = $1', [id]);
+    res.status(200).json({ message: 'Tâche supprimée avec succès' });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
